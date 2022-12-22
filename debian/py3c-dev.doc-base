@@ -1,0 +1,11 @@
+Document: py3c
+Title: py3c: Python 2/3 compatibility layer for C extensions
+Author: Copyright (c) 2015, 2016 Red Hat, Inc. and/or its affiliates
+Abstract: py3c is a library for easing porting C extensions to Python 3,
+ providing macros for single-source compatibility between Python 2.6, 2.7,
+ and 3.3+. It could be described as “the six for C extensions”.
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/py3c-dev/html/index.html
+Files: /usr/share/doc/py3c-dev/html/*.html

@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+#export DH_VERBOSE = 1
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+	@echo Nothing to do
+
+override_dh_auto_build:
+	$(MAKE) build-python3
+	$(MAKE) build-python3-cpp
+	$(MAKE) py3c.pc
+	$(MAKE) doc
+
+override_dh_auto_test:
+	$(MAKE) test-python3
+	$(MAKE) test-python3-cpp
+
+override_dh_auto_install:
+	$(MAKE) install prefix=$(CURDIR)/debian/py3c-dev/usr
+	mkdir -p debian/py3c-dev/usr/share/pkgconfig
+	$(MAKE) -B py3c.pc includedir=/usr/include
+	cp py3c.pc debian/py3c-dev/usr/share/pkgconfig/.
+	mkdir -p debian/py3c-dev/usr/share/doc/py3c-dev
+	cp -a doc/build/html debian/py3c-dev/usr/share/doc/py3c-dev/.
+	dh_sphinxdoc /usr/share/doc/py3c-dev/html
+
+override_dh_auto_clean:
+	rm -rf doc/build test/build test/__pycache__ py3c.pc
+	dh_auto_clean
